@@ -6,12 +6,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 /**
  * This class provides different solutions to the classic "Two Sum" problem.
  * The problem typically asks to find two numbers in an array that sum up to a target,
