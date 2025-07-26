@@ -1,6 +1,22 @@
 # Two Sum Problem
 
 ---
+<!-- TOC -->
+
+* [Two Sum Problem](#two-sum-problem)
+    * [Description](#description)
+    * [Example of Expected Result](#example-of-expected-result)
+    * [Rules](#rules)
+    * [Solutions](#solutions)
+        * [Step-by-Step Execution Trace](#step-by-step-execution-trace)
+    * [Optimal Time Complexity: O(n)](#optimal-time-complexity-on)
+    * [Optimal Space Complexity: O(n)](#optimal-space-complexity-on)
+    * [How it works (The Logic):](#how-it-works-the-logic)
+    * [What is a HashSet? (HashMap)](#what-is-a-hashset-hashmap)
+    * [Why Use a HashSet? (HasMap)](#why-use-a-hashset-hasmap)
+
+<!-- TOC -->
+---
 
 ## Description
 
@@ -30,7 +46,7 @@ The expected output would be `[0, 1]` because `nums[0]` (which is `2`) + `nums[1
 5. **Order of Indices:** The order in which you return the indices does not matter. `[0, 1]` is considered the same as
    `[1, 0]`.
 
-## Solutions:
+## Solutions
 
 * **Brute-force approach:**
 
@@ -90,6 +106,27 @@ public static int[] twoNumberSumArrayIndexReturn(int[] array, int targetSum) {
     return new int[0];
 }
 ```
+
+### Step-by-Step Execution Trace
+
+This table demonstrates the execution flow with the example `array = [2, 7, 11, 15]` and `targetSum = 9`.
+
+| Step | Index (i) | Current Number (array[i]) | Target Sum | Complement (`targetSum - currentNum`) | `HashMap` Contents (Value -> Index) | `HashMap.containsKey(Complement)`? | Action Taken                                                           | Result (Indices Found) |
+|:-----|:----------|:--------------------------|:-----------|:--------------------------------------|:------------------------------------|:-----------------------------------|:-----------------------------------------------------------------------|:-----------------------|
+| 1    | 0         | 2                         | 9          | `9 - 2 = 7`                           | `{}`                                | `false`                            | `7` is not in map. Add `(2 -> 0)` to map.                              |                        |
+| 2    | 1         | 7                         | 9          | `9 - 7 = 2`                           | `{2 -> 0}`                          | `true`                             | `2` is in map! Pair found: `(2, 7)`. Return indices `[map.get(2), i]`. | `[0, 1]`               |
+|      |           |                           |            |                                       |                                     |                                    | **STOP: Solution Found.**                                              |                        |
+
+**Explanation:**
+
+* In **Step 1**, we process `2` at `index 0`. To reach `9`, we need `7`. Since our `HashMap` is empty, `7` isn't found.
+  So, we record that we've seen `2` at `index 0` in the map.
+* In **Step 2**, we process `7` at `index 1`. To reach `9`, we need `2`. We check our `HashMap` and find that `2` *is*
+  present, and its stored index is `0`. We've found our pair! The numbers are `2` (from `map.get(2)`) and `7` (the
+  `currentNumber`), and their original indices are `0` and `1`.
+
+This method achieves an average time complexity of **O(N)** because each number is processed once, and `HashMap`
+operations (insertion and lookup) take constant time on average.
 
 ## Optimal Time Complexity: O(n)
 
