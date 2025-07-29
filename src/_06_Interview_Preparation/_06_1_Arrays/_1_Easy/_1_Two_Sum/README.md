@@ -1,4 +1,4 @@
-# Two Sum Problem
+# 1. Two Sum Problem
 
 ---
 <!-- TOC -->
