@@ -95,7 +95,7 @@ good practices.
 
 ---
 
-## Module 4: Data Structures
+## [Module 4: Data Structures](src/_04_Data_Structures/README.md)
 
 Mastering data structures is absolutely essential. You must understand their time and space complexities.
 

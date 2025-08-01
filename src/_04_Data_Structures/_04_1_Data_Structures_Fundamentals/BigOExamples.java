@@ -1,135 +1,33 @@
-# 4.1. Fundamentals
+package _04_Data_Structures._04_1_Data_Structures_Fundamentals;
 
-<!-- TOC -->
-* [4.1. Fundamentals](#41-fundamentals)
-  * [Definition](#definition)
-  * [Purpose](#purpose)
-  * [Key Concepts](#key-concepts)
-  * [Most Common Time Complexity Classes](#most-common-time-complexity-classes)
-  * [Quick Reference Table](#quick-reference-table)
-  * [Code examples:](#code-examples)
-    * [1. O(1) - Constant Time](#1-o1---constant-time)
-    * [2. O(log n) – Logarithmic Time Complexity](#2-olog-n--logarithmic-time-complexity)
-    * [3. O(n) – Linear Time Complexity](#3-on--linear-time-complexity)
-    * [4. O(n log n) – Linearithmic Time Complexity](#4-on-log-n--linearithmic-time-complexity)
-    * [5. O(n²) – Quadratic Time Complexity](#5-on--quadratic-time-complexity)
-    * [6. O(2^n) – Exponential Time Complexity](#6-o2n--exponential-time-complexity)
-    * [7. O(n!) – Factorial Time Complexity](#7-on--factorial-time-complexity)
-  * [Interview Questions (sample)](#interview-questions-sample)
-<!-- TOC -->
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
----
-
-## Definition
-
-* **Time Complexity:**
-  measures how the runtime of an algorithm grows with input size (*n*)—in terms of the number of
-  operations.
-
-* **Space Complexity:** measures how much additional memory the algorithm uses as *n* increases.
-
-Both are expressed using Big‑O notation.
-
-## Purpose
-
-- To predict performance and scalability independently of machine-specific details.
-- To compare alternative algorithms or data structures by their growth rates.
-- To guide decisions in time-sensitive or memory-constrained environments.
-
-## Key Concepts
-
-- **Big‑O** defines an **upper bound** (worst-case), describing maximum.
-- **Big Ω (Omega)** denotes a **lower bound** (best-case).
-- **Big Θ (Theta)** captures **tight bounds** when best, average, and worst are asymptotically same.
-- Common cases:
-    - **Worst-case**: maximum resources (primary for Big‑O)
-    - **Average-case**: expected behavior under typical/random input
-    - **Best-case**: minimal time/memory for ideal input :contentReference[oaicite:4]{index=4}
-
-- Simplification rules:
-    - Drop constant factors and lower-order terms (e.g. \(6n^2 - 2n + 5 = O(n^2)\))
-    - Typical complexity classes (most efficient → least):
-        - \(O(1)\),
-        - \(O(\log n)\),
-        - \(O(n)\),
-        - \(O(n \log n)\),
-        - \(O(n^2)\)
-
-## Most Common Time Complexity Classes
-
-1) **O(1) – Constant time:**
-
-   Runtime does not change with input size (e.g., direct array access or simple arithmetic)
-
-2) **O(log n) – Logarithmic time:**
-
-   Runtime grows slowly, typically seen in divide-and-conquer algorithms like binary search or in balanced trees.
-
-3) **O(n) – Linear time:**
-
-   Runtime increases proportionally with input size, common in simple loops, linear traversal, or scanning structures.
-
-4) **O(n log n) – Quasilinear / Linearithmic time:**
-
-   Typical of efficient general-purpose sorting algorithms like quicksort or mergesort.
-
-5) **O(n²) – Quadratic time:**
-
-   Results from nested loops, seen in simple sorts or double iteration algorithms.
-
-6) **O(2ⁿ) – Exponential time:**
-
-   Often seen in recursive brute-force or backtracking problems (e.g., naive Fibonacci, subset enumeration).
-
-7) **O(n!) – Factorial time:**
-
-   Appears in exhaustive combinatorial algorithms (like permutations) and rapidly becomes infeasible even at small n.
-
-## Quick Reference Table
-
-| Rank | Complexity     | Typical Context                           |
-|------|----------------|-------------------------------------------|
-| 1    | **O(1)**       | Constant-time operations                  |
-| 2    | **O(log n)**   | Binary search, tree lookups               |
-| 3    | **O(n)**       | Single-pass loops, linear scans           |
-| 4    | **O(n log n)** | Efficient sorting, divide-and-conquer     |
-| 5    | **O(n²)**      | Nested loops, simple sorting methods      |
-| 6    | **O(2ⁿ)**      | Recursive/backtracking brute force        |
-| 7    | **O(n!)**      | Enumerating all permutations/combinations |
-
-## Code examples:
-
-### 1. O(1) - Constant Time
-
-```java
+/**
+ * This class provides examples of common time complexities
+ * used in Big O notation, from constant time to factorial time.
+ * Each method demonstrates a different complexity class with a
+ * clear explanation of its performance characteristics.
+ */
 public class BigOExamples {
+
+    // 1. O(1) – Constant Time Complexity
 
     /**
-     * O(1) - Constant Time
+     * Determines if a number is even.
+     * This method has a constant time complexity, O(1).
+     * The time it takes to execute does not depend on the size of the input 'n'.
+     * It performs a fixed number of operations: one modulo division and one comparison.
      *
-     * Why O(1)?:
-     * - Performs a single arithmetic operation and comparison
-     * - Execution time doesn't depend on input size
-     *
-     * @param n Input number
-     * @return true if n is even, false otherwise
+     * @param n The integer to check.
+     * @return true if the number is even, false otherwise.
      */
     public static boolean isEven(int n) {
-        return n % 2 == 0;  // Single operation: modulo + comparison
+        // A single arithmetic operation and a comparison. The runtime is always the same.
+        return n % 2 == 0;
     }
 
-    public static void main(String[] args) {
-        System.out.println("--- 1. O(1) Constant Time ---");
-        System.out.println("Is 4 even? " + isEven(4)); // true
-        System.out.println("Is 7 even? " + isEven(7)); // false
-    }
-}
-```
-
-### 2. O(log n) – Logarithmic Time Complexity
-
-```java
-public class BigOExamples {
     // 2. O(log n) – Logarithmic Time Complexity
 
     /**
@@ -165,20 +63,6 @@ public class BigOExamples {
         return -1;
     }
 
-    public static void main(String[] args) {
-        System.out.println("--- 2. O(log n) Logarithmic Time (Binary Search) ---");
-        int[] sortedArray = {10, 20, 30, 40, 50, 60, 70, 80, 90};
-        System.out.println("Array: " + Arrays.toString(sortedArray));
-        System.out.println("Index of 50: " + binarySearch(sortedArray, 50)); // 4
-        System.out.println("Index of 99: " + binarySearch(sortedArray, 99)); // -1
-    }
-}
-```
-
-### 3. O(n) – Linear Time Complexity
-
-```java
-public class BigOExamples {
     // 3. O(n) – Linear Time Complexity
 
     /**
@@ -201,19 +85,6 @@ public class BigOExamples {
         return max;
     }
 
-    public static void main(String[] args) {
-        System.out.println("--- 3. O(n) Linear Time (Find Max) ---");
-        int[] unsortedArray = {5, 2, 9, 1, 5, 6};
-        System.out.println("Array: " + Arrays.toString(unsortedArray));
-        System.out.println("Maximum value: " + findMax(unsortedArray)); // 9
-    }
-}
-```
-
-### 4. O(n log n) – Linearithmic Time Complexity
-
-```java
-public class BigOExamples {
     // 4. O(n log n) – Linearithmic Time Complexity
 
     /**
@@ -267,20 +138,6 @@ public class BigOExamples {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("--- 4. O(n log n) Linearithmic Time (Merge Sort) ---");
-        int[] arrayToSort = {38, 27, 43, 3, 9, 82, 10};
-        System.out.println("Original array: " + Arrays.toString(arrayToSort));
-        mergeSort(arrayToSort);
-        System.out.println("Sorted array:   " + Arrays.toString(arrayToSort));
-    }
-}
-```
-
-### 5. O(n²) – Quadratic Time Complexity
-
-```java
-public class BigOExamples {
     // 5. O(n²) – Quadratic Time Complexity
 
     /**
@@ -307,20 +164,6 @@ public class BigOExamples {
         return false;
     }
 
-    public static void main(String[] args) {
-        System.out.println("--- 5. O(n²) Quadratic Time (Has Duplicate) ---");
-        int[] withDuplicates = {1, 2, 3, 4, 3, 5};
-        int[] withoutDuplicates = {1, 2, 3, 4, 5};
-        System.out.println("Array with duplicates " + Arrays.toString(withDuplicates) + ": " + hasDuplicate(withDuplicates)); // true
-        System.out.println("Array without duplicates " + Arrays.toString(withoutDuplicates) + ": " + hasDuplicate(withoutDuplicates)); // false
-    }
-}
-```
-
-### 6. O(2^n) – Exponential Time Complexity
-
-```java
-public class BigOExamples {
     // 6. O(2^n) – Exponential Time Complexity
 
     /**
@@ -329,9 +172,9 @@ public class BigOExamples {
      * For each element in the input array, there are two choices: either to include it in a subset or not.
      * This branching process leads to 2^n total subsets.
      *
-     * @param arr The array of elements to generate subsets from.
-     * @param index The current index being considered.
-     * @param result A list to store all generated subsets.
+     * @param arr     The array of elements to generate subsets from.
+     * @param index   The current index being considered.
+     * @param result  A list to store all generated subsets.
      * @param current A temporary list representing the current subset being built.
      */
     public static void generateSubsets(int[] arr, int index, List<List<Integer>> result, List<Integer> current) {
@@ -355,21 +198,6 @@ public class BigOExamples {
         current.remove(current.size() - 1);
     }
 
-    public static void main(String[] args) {
-        System.out.println("--- 6. O(2^n) Exponential Time (Generate Subsets) ---");
-        int[] subsetArray = {1, 2, 3};
-        List<List<Integer>> subsets = new ArrayList<>();
-        generateSubsets(subsetArray, 0, subsets, new ArrayList<>());
-        System.out.println("Subsets of {1, 2, 3}: " + subsets);
-        // Expected output: [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]]
-    }
-}
-```
-
-### 7. O(n!) – Factorial Time Complexity
-
-```java
-public class BigOExamples {
     // 7. O(n!) – Factorial Time Complexity
 
     /**
@@ -378,9 +206,9 @@ public class BigOExamples {
      * of the 'n' elements. For an array of size n, there are n! (n factorial) permutations.
      * This is the slowest growth rate among the common complexities.
      *
-     * @param arr The array to generate permutations from.
-     * @param l The starting index of the subarray to permute.
-     * @param r The ending index of the subarray to permute.
+     * @param arr    The array to generate permutations from.
+     * @param l      The starting index of the subarray to permute.
+     * @param r      The ending index of the subarray to permute.
      * @param result A list to store all generated permutations.
      */
     public static void permute(int[] arr, int l, int r, List<int[]> result) {
@@ -411,7 +239,51 @@ public class BigOExamples {
         arr[j] = t;
     }
 
+    /**
+     * The main method to demonstrate and test all the Big O examples.
+     */
     public static void main(String[] args) {
+
+        System.out.println("--- 1. O(1) Constant Time ---");
+        System.out.println("Is 4 even? " + isEven(4)); // true
+        System.out.println("Is 7 even? " + isEven(7)); // false
+        System.out.println();
+
+        System.out.println("--- 2. O(log n) Logarithmic Time (Binary Search) ---");
+        int[] sortedArray = {10, 20, 30, 40, 50, 60, 70, 80, 90};
+        System.out.println("Array: " + Arrays.toString(sortedArray));
+        System.out.println("Index of 50: " + binarySearch(sortedArray, 50)); // 4
+        System.out.println("Index of 99: " + binarySearch(sortedArray, 99)); // -1
+        System.out.println();
+
+        System.out.println("--- 3. O(n) Linear Time (Find Max) ---");
+        int[] unsortedArray = {5, 2, 9, 1, 5, 6};
+        System.out.println("Array: " + Arrays.toString(unsortedArray));
+        System.out.println("Maximum value: " + findMax(unsortedArray)); // 9
+        System.out.println();
+
+        System.out.println("--- 4. O(n log n) Linearithmic Time (Merge Sort) ---");
+        int[] arrayToSort = {38, 27, 43, 3, 9, 82, 10};
+        System.out.println("Original array: " + Arrays.toString(arrayToSort));
+        mergeSort(arrayToSort);
+        System.out.println("Sorted array:   " + Arrays.toString(arrayToSort));
+        System.out.println();
+
+        System.out.println("--- 5. O(n²) Quadratic Time (Has Duplicate) ---");
+        int[] withDuplicates = {1, 2, 3, 4, 3, 5};
+        int[] withoutDuplicates = {1, 2, 3, 4, 5};
+        System.out.println("Array with duplicates " + Arrays.toString(withDuplicates) + ": " + hasDuplicate(withDuplicates)); // true
+        System.out.println("Array without duplicates " + Arrays.toString(withoutDuplicates) + ": " + hasDuplicate(withoutDuplicates)); // false
+        System.out.println();
+
+        System.out.println("--- 6. O(2^n) Exponential Time (Generate Subsets) ---");
+        int[] subsetArray = {1, 2, 3};
+        List<List<Integer>> subsets = new ArrayList<>();
+        generateSubsets(subsetArray, 0, subsets, new ArrayList<>());
+        System.out.println("Subsets of {1, 2, 3}: " + subsets);
+        // Expected output: [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]]
+        System.out.println();
+
         System.out.println("--- 7. O(n!) Factorial Time (Generate Permutations) ---");
         int[] permuteArray = {1, 2, 3};
         List<int[]> permutations = new ArrayList<>();
@@ -420,21 +292,6 @@ public class BigOExamples {
         for (int[] p : permutations) {
             System.out.println(Arrays.toString(p));
         }
+        System.out.println();
     }
 }
-```
-
-## Interview Questions
-
-**Q: What’s Big‑O?**
-A: It describes the growth rate of time or memory usage in the worst-case relative to input size n.
-
-**Q: Difference between best‑, average‑, worst‑case?**
-A: Best-case is optimal scenario, average-case is expectation over input distribution, worst-case is upper bound for any
-input. Standard Big‑O refers to worst-case.
-
-**Q: Why ignore constants and smaller-order terms?**
-A: As n grows large, constants and lower-order terms become insignificant for scaling behavior.
-
-**Q: When would average-case be more relevant than worst-case?**
-A: In real-time or interactive systems, median or percentile latencies are more meaningful for user experience.
