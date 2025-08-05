@@ -1,4 +1,4 @@
-package _06_Interview_Preparation._06_1_Arrays._1_Easy._3_Longest_Substring_Without_Repeating_Characters;
+package _06_Interview_Preparation._06_2_Strings._1_Easy._3_Longest_Substring_Without_Repeating_Characters;
 
 import java.util.HashSet;
 import java.util.Set;
