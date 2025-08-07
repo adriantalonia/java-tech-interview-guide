@@ -13,6 +13,11 @@
     * [✅ Summary](#-summary)
     * [❓ Common Interview Questions](#-common-interview-questions)
     * [🧠 Tips for Interviews](#-tips-for-interviews)
+    * [Singly Linked List](#singly-linked-list)
+        * [1. Traversal of Singly Linked List](#1-traversal-of-singly-linked-list)
+        * [2. Searching in Singly Linked List](#2-searching-in-singly-linked-list)
+        * [3. Length of Singly Linked List](#3-length-of-singly-linked-list)
+        * [4. Insertion in Singly Linked List](#4-insertion-in-singly-linked-list)
 
 <!-- TOC -->
 
@@ -421,6 +426,136 @@ public void insertAtPosition(int data, int position) {
     // 5. Perform the insertion
     newNode.next = current.next; // New node's next points to the next node of the current node
     current.next = newNode;      // Current node's next points to the new node
+}
+```
+
+### 5. Deletion in Singly Linked List
+
+Deletion involves removing a node from the linked list. Similar to insertion, there are different scenarios for
+deletion:
+
+**a. Deletion at the Beginning of Singly Linked List:** To delete the first node, update the head to point to the second
+node in the list.
+
+**Steps-by-step approach:**
+
+- Check if the head is NULL.
+    - If it is, return NULL (the list is empty).
+- Store the current head node in a temporary variable temp.
+- Move the head pointer to the next node.
+- Delete the temporary node.
+- Return the new head of the linked list.
+
+![image](resources/Deletion-at-beginning.png)
+
+```java
+/**
+ * 5a. Deletion at the Beginning of Singly Linked List
+ * Deletes the first node (head) of the list.
+ * Time Complexity: O(1)
+ */
+public void deleteAtBeginning() {
+    if (this.head == null) {
+        System.out.println("List is empty. Nothing to delete.");
+        return;
+    }
+    Node temp = this.head; // Store head node to delete later
+    this.head = this.head.next; // Move head to the next node
+    temp.next = null; // Detach the node from the list
+}
+```
+
+**b. Deletion at the End of Singly Linked List:** To delete the last node, traverse the list until the second-to-last
+node and update its next field to None.
+
+**Steps-by-step approach:**
+
+- Check if the head is NULL.
+    - If it is, return NULL (the list is empty).
+- Store the current head node in a temporary variable temp.
+- Move the head pointer to the next node.
+- Delete the temporary node.
+- Return the new head of the linked list.
+
+![image](resources/Deletion-At-End.png)
+
+```java
+/**
+ * 5b. Deletion at the End of Singly Linked List
+ * Deletes the last node (tail) of the list.
+ * Time Complexity: O(n)
+ */
+public void deleteAtEnd() {
+    if (this.head == null) {
+        System.out.println("List is empty. Nothing to delete.");
+        return;
+    }
+    // Case: Only one node in the list
+    if (this.head.next == null) {
+        this.head = null;
+        return;
+    }
+    // Traverse to the second last node
+    Node current = this.head;
+    while (current.next.next != null) {
+        current = current.next;
+    }
+    // Delete the last node
+    current.next = null;
+}
+```
+
+**c. Deletion at a Specific Position of Singly Linked List:** To delete a node at a specific position, traverse the list
+to the desired position, update the links to bypass the node to be deleted.
+
+**Step-by-step approach:**
+
+- Check if the list is empty or the position is invalid, return if so.
+- If the head needs to be deleted, update the head and delete the node.
+- Traverse to the node before the position to be deleted.
+- If the position is out of range, return.
+- Store the node to be deleted.
+- Update the links to bypass the node.
+- Delete the stored node.
+
+![image](resources/Deletion-specific-At-End.png)
+
+```java
+/**
+ * 5c. Deletion at a Specific Position of Singly Linked List
+ * Deletes the node at the given position (0-indexed).
+ * @param position The position of the node to delete.
+ * Time Complexity: O(n)
+ */
+public void deleteAtPosition(int position) {
+    if (this.head == null) {
+        System.out.println("List is empty. Nothing to delete.");
+        return;
+    }
+    // Handle invalid positions
+    if (position < 0) {
+        System.out.println("Invalid position. Position cannot be negative.");
+        return;
+    }
+    // Case: Delete head node (position 0)
+    if (position == 0) {
+        deleteAtBeginning();
+        return;
+    }
+    Node current = this.head;
+    int count = 0;
+    // Traverse to the node before the target position
+    while (current != null && count < position - 1) {
+        current = current.next;
+        count++;
+    }
+    // Check if position is out of bounds
+    if (current == null || current.next == null) {
+        System.out.println("Position out of bounds.");
+        return;
+    }
+    // Bypass the node to delete
+    current.next = current.next.next;
 }
 ```
 
