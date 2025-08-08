@@ -559,3 +559,83 @@ public void deleteAtPosition(int position) {
 }
 ```
 
+### 6. Modify a Singly Linked List
+
+Updating in a Singly Linked List means modifying the value of a node at a given position.
+
+**Step-by-step approach:**
+
+- Start from the head of the list.
+- Traverse to the required position (move current node to position).
+- Check if the position is valid:
+    - If the position is out of bounds, return an error.
+- Update the node’s data with the new value.
+- Return the modified list.
+
+```java
+/**
+ * 6. Modify a Singly Linked List
+ * Updates the value of a node at a given position (0-indexed).
+ *
+ * @param position The position of the node to modify.
+ * @param newData  The new data to set.
+ *                 Time Complexity: O(n)
+ */
+public void modify(int position, int newData) {
+    if (position < 0 || this.head == null) {
+        System.out.println("Invalid position or list is empty.");
+        return;
+    }
+
+    Node current = this.head;
+    int count = 0;
+
+    while (current != null && count < position) {
+        current = current.next;
+        count++;
+    }
+
+    if (current != null) {
+        current.data = newData;
+    } else {
+        System.out.println("Position out of bounds.");
+    }
+}
+```
+
+### 7. Reversing a Singly Linked List
+
+Reversing a singly linked list means changing the direction of pointers so that the last node becomes the new head.
+
+**Step-by-step approach:**
+
+- Initialize three pointers:
+    - prev = NULL (to track the previous node)
+    - current = head (starting point)
+    - next = NULL (to store the next node temporarily)
+- Iterate through the list:
+    - Store next = current->next (save next node).
+    - Reverse the link: current->next = prev.
+    - Move prev and current forward (prev = current, current = next).
+- Update head to prev (new head is the last node).
+
+```java
+/**
+ * 7. Reversing a Singly Linked List
+ * Reverses the list iteratively.
+ * Time Complexity: O(n)
+ */
+public void reverse() {
+    Node previous = null;
+    Node current = this.head;
+    Node next = null;
+
+    while (current != null) {
+        next = current.next; // Store the next node
+        current.next = previous; // Reverse the current node's pointer
+        previous = current; // Move previous one step forward
+        current = next; // Move current one step forward
+    }
+    this.head = previous; // The new head is the last node of the original list
+}
+```
