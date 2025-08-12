@@ -169,7 +169,7 @@ public class BuiltInLinkedListExample {
 
 ---
 
-## Singly Linked List
+## 4.4.1 Singly Linked List
 
 A singly linked list is a fundamental data structure, it consists of nodes where each node contains a data field and a
 reference to the next node in the linked list. The next of the last node is null, indicating the end of the list. Linked

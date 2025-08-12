@@ -1,4 +1,4 @@
-package _04_Data_Structures._04_4_Linked_Lists;
+package _04_Data_Structures._04_4_Linked_Lists._04_4_1_Singly_Linked_List;
 
 class Node {
     int data;
