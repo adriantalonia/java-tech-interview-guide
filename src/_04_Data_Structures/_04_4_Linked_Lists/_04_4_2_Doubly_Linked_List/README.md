@@ -1,13 +1,19 @@
 # 4.4.2 Doubly Linked
 
 <!-- TOC -->
-
 * [4.4.2 Doubly Linked](#442-doubly-linked)
-    * [Representation of Doubly Linked List in Data Structure](#representation-of-doubly-linked-list-in-data-structure)
-    * [Key Points](#key-points)
-    * [Use Cases (Real-World & Interviews)](#use-cases-real-world--interviews)
-    * [Summary](#summary)
-
+  * [Representation of Doubly Linked List in Data Structure](#representation-of-doubly-linked-list-in-data-structure)
+  * [Key Points](#key-points)
+  * [Use Cases (Real-World & Interviews)](#use-cases-real-world--interviews)
+  * [Summary](#summary)
+    * [1. Traversal in Doubly Linked List](#1-traversal-in-doubly-linked-list)
+    * [2. Finding Length of Doubly Linked List](#2-finding-length-of-doubly-linked-list)
+    * [3. Insertion in a Doubly Linked List](#3-insertion-in-a-doubly-linked-list)
+    * [4. Deletion in a Doubly Linked List](#4-deletion-in-a-doubly-linked-list)
+  * [Advantages of Doubly Linked List](#advantages-of-doubly-linked-list)
+  * [Disadvantages of Doubly Linked List](#disadvantages-of-doubly-linked-list)
+  * [Applications of Doubly Linked List](#applications-of-doubly-linked-list)
+  * [Common Interview Questions for Doubly Linked Lists](#common-interview-questions-for-doubly-linked-lists)
 <!-- TOC -->
 
 A doubly linked list is a more complex data structure than a singly linked list, but it offers several advantages. The
@@ -224,25 +230,212 @@ public void insertAtEnd(int data) {
 
 3. Insertion at a Specific Position
 
+1) Create a new node with the given data.
+2) If inserting at the beginning, follow the steps for insertion at the start.
+3) Traverse the list to find the node after which insertion is needed.
+4) Set the next pointer of the new node to the next node of the current position.
+5) Set the prev pointer of the new node to the current node.
+6) Update the prev pointer of the next node to point to the new node (if it exists).
+7) Update the next pointer of the previous node to point to the new node.
+
 ```java
+// 3. Insertion at a Specific Position (0-indexed)
+// Inserts a new node at a given position.
+// Time Complexity: O(n)
+public void insertAtPosition(int data, int position) {
+    if (position < 0) {
+        System.out.println("Invalid position.");
+        return;
+    }
+    if (position == 0) {
+        insertAtBeginning(data);
+        return;
+    }
+
+    Node newNode = new Node(data);
+    Node current = head;
+    int count = 0;
+
+    while (current != null && count < position) {
+        current = current.next;
+        count++;
+    }
+
+    if (current == null) { // Insertion at the end or out of bounds
+        if (count == position) { // Exactly at the end
+            insertAtEnd(data);
+        } else {
+            System.out.println("Position out of bounds.");
+        }
+    } else { // Insertion in the middle
+        newNode.next = current;
+        newNode.prev = current.prev;
+        current.prev.next = newNode;
+        current.prev = newNode;
+    }
+}
 ```
 
 ### 4. Deletion in a Doubly Linked List
 
-1. Deletion at the Beginning
+Deletion in a Doubly Linked List (DLL) involves removing a node while maintaining the integrity of the list. Since each
+node contains pointers to both its previous and next nodes, deletion requires careful pointer adjustments to ensure no
+broken links occur.
+
+**Types of Deletion in a Doubly Linked List**
+
+1. **Deletion at the Beginning**
+
+1) **Check for an empty list**. First, check if the head is null. If it is, the list is empty, so there is nothing to
+   delete, and the method should exit.
+2) **Handle a single-node list**. If the head and tail are the same, the list contains only one node. To delete it, set
+   both head and tail to null.
+3) **Update pointers for a multi-node list**. If the list has more than one node:
+    - Move the head pointer to the next node: head = head.next;.
+    - Set the prev pointer of the new head to null: head.prev = null;.
+4) **Implicit Deletion**. The original head node is now unreferenced by the list. Java's garbage collector will
+   automatically reclaim its memory, effectively "deleting" it.
 
 ```java
+// 1. Deletion at the Beginning
+// Deletes the first node (head) of the list.
+// Time Complexity: O(1)
+public void deleteAtBeginning() {
+    if (head == null) {
+        System.out.println("List is empty. Nothing to delete.");
+        return;
+    }
+    if (head == tail) { // Only one node in the list
+        head = null;
+        tail = null;
+    } else {
+        head = head.next;
+        head.prev = null;
+    }
+}
 ```
 
-2. Deletion at the End
+2. **Deletion at the End**
+
+1) Check if the list is empty; if it is, return.
+2) Traverse the list to find the last node.
+3) Store the last node in a temporary variable.
+4) Update the next pointer of the second-last node to NULL, making it the new tail.
+5) Delete the last node to free memory.
 
 ```java
+// Implementation of deletion at the end following the five-step process.
+// Note: This approach is not recommended for a doubly linked list
+// as it is inefficient (O(n) time complexity).
+public void deleteAtEndInefficient() {
+    // 1. Check if the list is empty; if it is, return.
+    if (head == null) {
+        System.out.println("List is empty. Nothing to delete.");
+        return;
+    }
+
+    // Edge case: If there's only one node in the list
+    if (head.next == null) {
+        head = null;
+        return;
+    }
+
+    // 2. Traverse the list to find the second-to-last node.
+    // The steps say to find the last node, but to update the second-last,
+    // we must traverse to the second-last node.
+    Node current = head;
+    while (current.next.next != null) {
+        current = current.next;
+    }
+
+    // 3. Store the last node in a temporary variable (optional in Java).
+    // Node lastNode = current.next;
+
+    // 4. Update the next pointer of the second-last node to NULL, making it the new tail.
+    current.next = null;
+
+    // 5. The old last node is now unreferenced and eligible for garbage collection.
+    // Explicit deletion (as mentioned in the steps) is not required in Java.
+}
 ```
 
 3. Deletion at a Specific Position
 
+1) Check if the list is empty; if it is, return.
+2) Traverse the list to find the node to be deleted.
+3) Store the node to be deleted in a temporary variable.
+4) Update the next pointer of the previous node to point to the next node.
+5) Update the prev pointer of the next node to point to the previous node (if it exists).
+6) Delete the target node to free memory.
+
 ```java
+// 3. Deletion at a Specific Position (0-indexed)
+// Deletes the node at a given position.
+// Time Complexity: O(n)
+public void deleteAtPosition(int position) {
+    if (head == null) {
+        System.out.println("List is empty.");
+        return;
+    }
+    if (position < 0) {
+        System.out.println("Invalid position.");
+        return;
+    }
+    if (position == 0) {
+        deleteAtBeginning();
+        return;
+    }
+
+    Node current = head;
+    int count = 0;
+    while (current != null && count < position) {
+        current = current.next;
+        count++;
+    }
+
+    if (current == null) {
+        System.out.println("Position out of bounds.");
+        return;
+    }
+
+    // Deleting the node in the middle or at the end
+    if (current.next != null) {
+        current.next.prev = current.prev;
+    }
+    if (current.prev != null) {
+        current.prev.next = current.next;
+    }
+
+    // If the deleted node was the tail, update the tail
+    if (current == tail) {
+        tail = current.prev;
+    }
+}
 ```
+
+## Advantages of Doubly Linked List
+
+* Efficient traversal in both directions: Doubly linked lists allow for efficient traversal of the list in both
+  directions, making it suitable for applications where frequent insertions and deletions are required.
+* Easy insertion and deletion of nodes: The presence of pointers to both the previous and next nodes makes it easy to
+  insert or delete nodes from the list, without having to traverse the entire list.
+* Can be used to implement a stack or queue: Doubly linked lists can be used to implement both stacks and queues, which
+  are common data structures used in programming.
+
+## Disadvantages of Doubly Linked List
+
+* More complex than singly linked lists: Doubly linked lists are more complex than singly linked lists, as they require
+  additional pointers for each node.
+* More memory overhead: Doubly linked lists require more memory overhead than singly linked lists, as each node stores
+  two pointers instead of one.
+
+## Applications of Doubly Linked List
+
+* Implementation of undo and redo functionality in text editors.
+* Cache implementation where quick insertion and deletion of elements are required.
+* Browser history management to navigate back and forth between visited pages.
+* Music player applications to manage playlists and navigate through songs efficiently.
+* Implementing data structures like Deque (double-ended queue) for efficient insertion and deletion at both ends.
 
 ## Common Interview Questions for Doubly Linked Lists
 
