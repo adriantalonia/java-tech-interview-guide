@@ -1,4 +1,4 @@
-package _06_Interview_Preparation._06_1_Arrays._0_Basics._Search_in_a_Matrix;
+package _06_Interview_Preparation._06_1_Arrays._0_Basics._01_Search_in_a_Matrix;
 
 import java.util.Arrays;
 

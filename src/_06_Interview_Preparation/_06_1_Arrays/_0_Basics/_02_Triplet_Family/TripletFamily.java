@@ -1,4 +1,4 @@
-package _06_Interview_Preparation._06_1_Arrays._0_Basics._Triplet_Family;
+package _06_Interview_Preparation._06_1_Arrays._0_Basics._02_Triplet_Family;
 
 import java.util.Arrays;
 
