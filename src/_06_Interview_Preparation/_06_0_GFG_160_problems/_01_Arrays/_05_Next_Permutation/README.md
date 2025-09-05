@@ -123,6 +123,20 @@ static void nextPermutation(int[] arr) {
     // Step 4: Reverse the suffix
     reverse(arr, pivot + 1, n - 1);
 }
+
+// Helper method to reverse array
+private static void reverse(int[] arr, int start, int end) {
+    while (start < end) {
+        swap(arr, start++, end--);
+    }
+}
+
+// Helper method to swap two elements
+private static void swap(int[] arr, int i, int j) {
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
 ```
 
 **Time Complexity:** O(n) - Three linear scans at most  
